@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison Garnier · Boulangerie Pâtisserie</title>
+<meta name="description" content="Boulangerie artisanale : pain au levain cuit sur place chaque matin, viennoiseries pur beurre, gâteaux sur commande.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --creme: #fbf6ee;
+    --creme-2: #f3e9d8;
+    --ble: #e6d3ac;
+    --brun: #2b1d14;
+    --brun-doux: #5c4636;
+    --terre: #b9532a;
+    --terre-fonce: #93401f;
+    --vert: #3f7a4b;
+    --rayon: 18px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--creme);
+    color: var(--brun);
+    font: 17px/1.6 "Inter", system-ui, sans-serif;
+  }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; line-height: 1.15; margin: 0 0 .5em; }
+  h1 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); letter-spacing: -.01em; }
+  h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); }
+  h3 { font-size: 1.25rem; }
+  p { margin: 0 0 1em; }
+  a { color: inherit; }
+  .conteneur { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  .demo {
+    background: var(--brun); color: var(--creme);
+    font-size: .82rem; text-align: center; padding: 7px 16px;
+  }
+
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(251, 246, 238, .94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--creme-2);
+  }
+  .barre { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; max-width: 1120px; margin: 0 auto; }
+  .logo { text-decoration: none; display: flex; flex-direction: column; }
+  .logo strong { font-family: "Fraunces", serif; font-size: 1.4rem; }
+  .logo span { font-size: .78rem; color: var(--brun-doux); letter-spacing: .06em; text-transform: uppercase; }
+  nav { display: flex; gap: 26px; font-weight: 500; font-size: .95rem; }
+  nav a { text-decoration: none; color: var(--brun-doux); }
+  nav a:hover { color: var(--terre); }
+
+  .bouton {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--terre); color: #fff; text-decoration: none;
+    font-weight: 600; font-size: .98rem;
+    padding: 12px 22px; border-radius: 999px; border: 0; cursor: pointer;
+    transition: background .15s;
+  }
+  .bouton:hover { background: var(--terre-fonce); }
+  .bouton.clair { background: transparent; color: var(--brun); box-shadow: inset 0 0 0 1.5px var(--brun); }
+  .bouton.clair:hover { background: var(--creme-2); }
+
+  .hero { padding: 72px 0 80px; }
+  .hero .conteneur { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
+  .statut {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fff; border-radius: 999px; padding: 6px 14px;
+    font-size: .9rem; font-weight: 500; margin-bottom: 22px;
+    box-shadow: 0 1px 2px rgba(43, 29, 20, .08);
+  }
+  .point { width: 9px; height: 9px; border-radius: 50%; background: var(--vert); }
+  .statut.ferme .point { background: var(--terre); }
+  .hero p.intro { font-size: 1.15rem; color: var(--brun-doux); max-width: 34em; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+  .carte-jour {
+    background: var(--brun); color: var(--creme);
+    border-radius: var(--rayon); padding: 34px;
+    position: relative; overflow: hidden;
+  }
+  .carte-jour::after {
+    content: ""; position: absolute; right: -60px; bottom: -60px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: var(--terre); opacity: .35;
+  }
+  .carte-jour small { text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; opacity: .75; }
+  .carte-jour .pain { font-family: "Fraunces", serif; font-size: 2rem; margin: 8px 0 14px; position: relative; z-index: 1; }
+  .carte-jour ul { list-style: none; padding: 0; margin: 0; position: relative; z-index: 1; }
+  .carte-jour li { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid rgba(251, 246, 238, .16); }
+
+  section { padding: 80px 0; }
+  .fond { background: var(--creme-2); }
+  .entete { max-width: 640px; margin-bottom: 40px; }
+  .entete p { color: var(--brun-doux); }
+
+  .grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .produit { background: #fff; border-radius: var(--rayon); padding: 26px; }
+  .produit svg { width: 40px; height: 40px; color: var(--terre); margin-bottom: 14px; }
+  .produit ul { list-style: none; padding: 0; margin: 12px 0 0; font-size: .95rem; }
+  .produit li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px solid var(--creme-2); }
+  .produit li span:last-child { font-weight: 600; white-space: nowrap; }
+
+  .commande { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; }
+  .etapes { list-style: none; padding: 0; margin: 24px 0 0; counter-reset: e; }
+  .etapes li { counter-increment: e; display: flex; gap: 14px; margin-bottom: 18px; color: var(--brun-doux); }
+  .etapes li::before {
+    content: counter(e); flex: none; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--ble); color: var(--brun); font-weight: 600; display: grid; place-items: center;
+  }
+  form { background: #fff; border-radius: var(--rayon); padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  label { font-size: .88rem; font-weight: 600; display: grid; gap: 6px; }
+  label.large { grid-column: 1 / -1; }
+  input, select, textarea {
+    font: inherit; font-weight: 400; color: var(--brun);
+    border: 1.5px solid var(--ble); border-radius: 10px; padding: 11px 12px; background: var(--creme);
+  }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--terre); outline-offset: 1px; border-color: transparent; }
+  form .bouton { grid-column: 1 / -1; justify-content: center; }
+  .merci { grid-column: 1 / -1; background: #e8f1e9; color: var(--vert); border-radius: 10px; padding: 12px 14px; font-weight: 500; display: none; }
+
+  .infos { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: var(--rayon); overflow: hidden; }
+  td { padding: 13px 20px; border-top: 1px solid var(--creme-2); }
+  tr:first-child td { border-top: 0; }
+  td:last-child { text-align: right; color: var(--brun-doux); }
+  tr.aujourdhui td { background: var(--ble); font-weight: 600; color: var(--brun); }
+  .adresse { background: var(--brun); color: var(--creme); border-radius: var(--rayon); padding: 30px; }
+  .adresse p { opacity: .85; }
+  .adresse .bouton { margin-top: 8px; }
+
+  .histoire { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .chiffres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .chiffre { background: #fff; border-radius: var(--rayon); padding: 22px; text-align: center; }
+  .chiffre strong { display: block; font-family: "Fraunces", serif; font-size: 2rem; color: var(--terre); }
+  .chiffre span { font-size: .88rem; color: var(--brun-doux); }
+
+  footer { background: var(--brun); color: var(--creme); padding: 40px 0 100px; font-size: .9rem; }
+  footer .conteneur { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; opacity: .85; }
+
+  .barre-mobile { display: none; }
+
+  @media (max-width: 900px) {
+    nav { display: none; }
+    .hero { padding: 40px 0 56px; }
+    .hero .conteneur, .commande, .infos, .histoire { grid-template-columns: 1fr; gap: 32px; }
+    .grille { grid-template-columns: 1fr 1fr; }
+    section { padding: 56px 0; }
+  }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .conteneur { padding: 0 16px; }
+    .barre { padding: 12px 16px; }
+    .barre > .bouton { display: none; }
+    .grille { grid-template-columns: 1fr; }
+    form { grid-template-columns: 1fr; padding: 22px; }
+    .chiffres { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .chiffre { padding: 16px 8px; }
+    .chiffre strong { font-size: 1.5rem; }
+    .carte-jour { padding: 26px; }
+    .barre-mobile {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      background: rgba(251, 246, 238, .96); border-top: 1px solid var(--creme-2);
+    }
+    .barre-mobile .bouton { justify-content: center; padding: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo">Site de démonstration : la boulangerie Maison Garnier est fictive.</div>
+
+<header>
+  <div class="barre">
+    <a class="logo" href="#">
+      <strong>Maison Garnier</strong>
+      <span>Boulangerie · Pâtisserie</span>
+    </a>
+    <nav aria-label="Menu principal">
+      <a href="#produits">Nos produits</a>
+      <a href="#commander">Commander</a>
+      <a href="#horaires">Horaires et accès</a>
+      <a href="#maison">La maison</a>
+    </nav>
+    <a class="bouton" href="tel:+33199001234">Appeler</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="conteneur">
+      <div>
+        <div class="statut" id="statut"><span class="point"></span><span id="statut-texte">Horaires</span></div>
+        <h1>Le pain du quartier, cuit sur place chaque matin.</h1>
+        <p class="intro">Levain naturel, farines d'un moulin de la région et viennoiseries pur beurre. Depuis 1987, on pétrit tout ici, à la main.</p>
+        <div class="actions">
+          <a class="bouton" href="#commander">Commander un gâteau</a>
+          <a class="bouton clair" href="#horaires">Voir les horaires</a>
+        </div>
+      </div>
+      <aside class="carte-jour" aria-label="Le pain du jour">
+        <small id="jour-nom">Aujourd'hui</small>
+        <div class="pain" id="pain-du-jour">Pain aux noix</div>
+        <ul>
+          <li><span>Baguette tradition</span><span>1,30 €</span></li>
+          <li><span>Croissant pur beurre</span><span>1,20 €</span></li>
+          <li><span>Formule midi</span><span>8,90 €</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="fond" id="produits">
+    <div class="conteneur">
+      <div class="entete">
+        <h2>Nos produits</h2>
+        <p>Une sélection de ce que vous trouverez en boutique. La carte change avec les saisons.</p>
+      </div>
+      <div class="grille">
+        <article class="produit">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 26c0-9 6-16 14-16s14 7 14 16c0 2-2 4-4 4H10c-2 0-4-2-4-4z"/><path d="M14 16l3 6M20 14v8M26 16l-3 6"/></svg>
+          <h3>Les pains</h3>
+          <ul>
+            <li><span>Baguette tradition</span><span>1,30 €</span></li>
+            <li><span>Pain de campagne</span><span>3,40 €</span></li>
+            <li><span>Grand levain (1 kg)</span><span>6,20 €</span></li>
+          </ul>
+        </article>
+        <article class="produit">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 24c4-10 10-14 16-14s12 4 16 14c-4 3-10 5-16 5S8 27 4 24z"/><path d="M13 14l4 13M20 12v16M27 14l-4 13"/></svg>
+          <h3>Viennoiseries</h3>
+          <ul>
+            <li><span>Croissant</span><span>1,20 €</span></li>
+            <li><span>Pain au chocolat</span><span>1,30 €</span></li>
+            <li><span>Brioche tressée</span><span>5,50 €</span></li>
+          </ul>
+        </article>
+        <article class="produit">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 30h28M8 30V20h24v10M11 20v-5h18v5"/><path d="M20 15v-5M18 8c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z"/></svg>
+          <h3>Pâtisseries</h3>
+          <ul>
+            <li><span>Éclair au café</span><span>3,60 €</span></li>
+            <li><span>Tarte aux fruits (6 parts)</span><span>21 €</span></li>
+            <li><span>Fraisier (6 parts)</span><span>26 €</span></li>
+          </ul>
+        </article>
+        <article class="produit">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20h30M7 20c0 6 6 10 13 10s13-4 13-10"/><path d="M9 16c2-5 6-7 11-7s9 2 11 7"/></svg>
+          <h3>Le midi</h3>
+          <ul>
+            <li><span>Sandwich du jour</span><span>5,40 €</span></li>
+            <li><span>Quiche maison</span><span>4,80 €</span></li>
+            <li><span>Formule complète</span><span>8,90 €</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="commander">
+    <div class="conteneur commande">
+      <div>
+        <h2>Votre gâteau, prêt quand vous passez</h2>
+        <p>Anniversaire, repas de famille, fête de bureau : commandez en deux minutes, on vous rappelle pour confirmer.</p>
+        <ol class="etapes">
+          <li>Choisissez votre gâteau et le nombre de parts.</li>
+          <li>Indiquez le jour où vous passez le chercher.</li>
+          <li>On vous appelle dans la journée pour valider.</li>
+        </ol>
+      </div>
+      <form id="formulaire">
+        <label>Votre nom<input required name="nom" autocomplete="name"></label>
+        <label>Téléphone<input required name="tel" type="tel" autocomplete="tel"></label>
+        <label>Gâteau
+          <select name="gateau">
+            <option>Fraisier</option>
+            <option>Tarte aux fruits de saison</option>
+            <option>Forêt-noire</option>
+            <option>Entremets chocolat</option>
+          </select>
+        </label>
+        <label>Nombre de parts
+          <select name="parts"><option>4</option><option selected>6</option><option>8</option><option>10</option><option>12</option></select>
+        </label>
+        <label class="large">Jour de retrait<input required name="date" type="date" id="date-retrait"></label>
+        <label class="large">Un message à écrire sur le gâteau ? (facultatif)<input name="message" placeholder="Joyeux anniversaire Léa"></label>
+        <button class="bouton" type="submit">Envoyer ma commande</button>
+        <div class="merci" id="merci" role="status">Merci ! Sur un vrai site, la boulangerie recevrait votre commande à l'instant. Ici c'est une démonstration, rien n'est envoyé.</div>
+      </form>
+    </div>
+  </section>
+
+  <section class="fond" id="horaires">
+    <div class="conteneur">
+      <div class="entete"><h2>Horaires et accès</h2></div>
+      <div class="infos">
+        <table aria-label="Horaires d'ouverture">
+          <tbody id="table-horaires"></tbody>
+        </table>
+        <div class="adresse">
+          <h3>Nous trouver</h3>
+          <p>8 place du Marché<br>En face de la mairie, parking gratuit sur la place.</p>
+          <p>01 99 00 12 34</p>
+          <a class="bouton" href="tel:+33199001234">Appeler la boutique</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="maison">
+    <div class="conteneur histoire">
+      <div>
+        <h2>La maison</h2>
+        <p>Paul et Hélène Garnier ont ouvert la boutique en 1987. Aujourd'hui, leur fille Claire a repris le fournil, avec la même règle : du temps, de bonnes farines et rien d'industriel.</p>
+        <p>Le levain est nourri chaque jour, les pâtes reposent toute la nuit, et la première fournée sort à 6 h.</p>
+      </div>
+      <div class="chiffres">
+        <div class="chiffre"><strong>1987</strong><span>ouverture</span></div>
+        <div class="chiffre"><strong>24 h</strong><span>de pousse lente</span></div>
+        <div class="chiffre"><strong>6 h</strong><span>première fournée</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="conteneur">
+    <span>Maison Garnier · 8 place du Marché</span>
+    <span>Site de démonstration, commerce fictif</span>
+  </div>
+</footer>
+
+<div class="barre-mobile">
+  <a class="bouton" href="tel:+33199001234">Appeler</a>
+  <a class="bouton clair" href="#commander">Commander</a>
+</div>
+
+<script>
+  // Horaires : [ouverture, fermeture] en minutes, null = fermé. Index 0 = dimanche.
+  const jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+  const horaires = [[420, 780], null, [390, 1170], [390, 1170], [390, 1170], [390, 1170], [390, 1140]];
+  const painsDuJour = ["Brioche du dimanche", "À demain, dès 6 h 30", "Pain aux noix", "Pain de seigle", "Pain aux céréales", "Pain au maïs", "Pain aux figues"];
+
+  const heure = m => `${Math.floor(m / 60)} h ${m % 60 ? String(m % 60).padStart(2, "0") : ""}`.trim();
+  const maintenant = new Date();
+  const aujourdhui = maintenant.getDay();
+  const minutes = maintenant.getHours() * 60 + maintenant.getMinutes();
+
+  // Tableau des horaires, du lundi au dimanche, ligne du jour en surbrillance
+  const corps = document.getElementById("table-horaires");
+  [1, 2, 3, 4, 5, 6, 0].forEach(j => {
+    const tr = document.createElement("tr");
+    if (j === aujourdhui) tr.className = "aujourdhui";
+    const h = horaires[j];
+    tr.innerHTML = `<td>${jours[j]}</td><td>${h ? `${heure(h[0])} – ${heure(h[1])}` : "Fermé"}</td>`;
+    corps.appendChild(tr);
+  });
+
+  // Ouvert ou fermé en ce moment
+  const statut = document.getElementById("statut");
+  const texte = document.getElementById("statut-texte");
+  const h = horaires[aujourdhui];
+  if (h && minutes >= h[0] && minutes < h[1]) {
+    texte.textContent = `Ouvert, jusqu'à ${heure(h[1])}`;
+  } else {
+    statut.classList.add("ferme");
+    let j = aujourdhui, prochain = h && minutes < h[0] ? h : null, decalage = 0;
+    while (!prochain) { j = (j + 1) % 7; decalage++; prochain = horaires[j]; }
+    const quand = decalage === 0 ? "aujourd'hui" : decalage === 1 ? "demain" : jours[j].toLowerCase();
+    texte.textContent = `Fermé, ouvre ${quand} à ${heure(prochain[0])}`;
+  }
+
+  // Pain du jour
+  document.getElementById("jour-nom").textContent = horaires[aujourdhui]
+    ? `${jours[aujourdhui]} · le pain du jour`
+    : `${jours[aujourdhui]} · jour de repos`;
+  document.getElementById("pain-du-jour").textContent = painsDuJour[aujourdhui];
+
+  // Formulaire de démonstration
+  const date = document.getElementById("date-retrait");
+  date.min = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+  document.getElementById("formulaire").addEventListener("submit", e => {
+    e.preventDefault();
+    document.getElementById("merci").style.display = "block";
+  });
+</script>
+</body>
+</html>
